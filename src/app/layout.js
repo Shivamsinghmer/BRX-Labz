@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import PrismaticBurst from "@/components/PrismaticBurst";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,11 +20,27 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable}  ${geistMono.variable} antialiased selection:bg-black/10 dark`}
       >
-        {children}
+        <Navbar />
+        <div className="fixed inset-0 -z-20 bg-background" />
+        <div className="fixed inset-0 -z-10">
+          <PrismaticBurst
+            animationType="rotate3d"
+            intensity={4}
+            speed={0.25}
+            paused={false}
+            offset={{ x: 0, y: 0 }}
+            hoverDampness={0.25}
+            mixBlendMode="lighten"
+          />
+        </div>
+        <div className="relative z-10 min-h-screen">
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
