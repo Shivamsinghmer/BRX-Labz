@@ -1,4 +1,3 @@
-"use client"
 import { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle, Texture } from 'ogl';
 
@@ -31,7 +30,6 @@ uniform vec2  uOffset;
 uniform sampler2D uGradient;
 uniform float uNoiseAmount;
 uniform int   uRayCount;
-uniform float uSaturation;
 
 float hash21(vec2 p){
     p = floor(p);
@@ -86,9 +84,10 @@ vec2 rot2(vec2 v, float a){
 }
 
 float bendAngle(vec3 q, float t){
-    // Simplified for performance: 2 sine waves instead of 3
-    return 0.8 * sin(q.x * 0.55 + t * 0.6)
-         + 0.7 * sin(q.y * 0.50 - t * 0.5);
+    float a = 0.8 * sin(q.x * 0.55 + t * 0.6)
+            + 0.7 * sin(q.y * 0.50 - t * 0.5)
+            + 0.6 * sin(q.z * 0.60 + t * 0.7);
+    return a;
 }
 
 void main(){
@@ -115,8 +114,7 @@ void main(){
       hoverMat = rotY(ang.y) * rotX(ang.x);
     }
 
-    // Reduced iterations from 18 to 12 for maximum mobile performance
-    for (int i = 0; i < 12; ++i) {
+    for (int i = 0; i < 44; ++i) {
         vec3 P = marchT * dir;
         P.z -= 2.0;
         float rad = length(P);
@@ -173,18 +171,8 @@ void main(){
     col *= edgeFade(frag, uResolution, uOffset);
     col *= uIntensity;
 
-    // Saturation adjustment
-    vec3 gray = vec3(dot(col, vec3(0.299, 0.587, 0.114)));
-    col = mix(gray, col, uSaturation);
-
-    // Alpha masking based on brightness for Light Theme support
-    float brightness = max(col.r, max(col.g, col.b));
-    float alpha = smoothstep(0.01, 0.1, brightness);
-    alpha *= edgeFade(frag, uResolution, uOffset);
-
-    fragColor = vec4(col, alpha);
-}
-`;
+    fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
+}`;
 
 const hexToRgb01 = hex => {
   let h = hex.trim();
@@ -212,7 +200,7 @@ const toPx = v => {
 };
 
 const PrismaticBurst = ({
-  intensity = 2,
+  intensity ,
   speed = 0.5,
   animationType = 'rotate3d',
   colors,
@@ -246,12 +234,8 @@ const PrismaticBurst = ({
     const container = containerRef.current;
     if (!container) return;
 
-    // PERFORMANCE OPTIMIZATION: Limit DPR on mobile to 1.0 or lower if needed
-    // And detect mobile to potentially lower resolution further
-    const isMobile = window.innerWidth <= 768;
-    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.5); // Cap DPR lower for performance
-
-    const renderer = new Renderer({ dpr, alpha: true, antialias: false });
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const renderer = new Renderer({ dpr, alpha: false, antialias: false });
     rendererRef.current = renderer;
 
     const gl = renderer.gl;
@@ -283,6 +267,7 @@ const PrismaticBurst = ({
       uniforms: {
         uResolution: { value: [1, 1] },
         uTime: { value: 0 },
+
         uIntensity: { value: 1 },
         uSpeed: { value: 1 },
         uAnimType: { value: 0 },
@@ -292,8 +277,7 @@ const PrismaticBurst = ({
         uOffset: { value: [0, 0] },
         uGradient: { value: gradientTex },
         uNoiseAmount: { value: 0.8 },
-        uRayCount: { value: 0 },
-        uSaturation: { value: 1.0 }
+        uRayCount: { value: 0 }
       }
     });
 
@@ -307,9 +291,7 @@ const PrismaticBurst = ({
     const resize = () => {
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
-      // On mobile, render at slightly lower resolution for huge FPS gain
-      const isSmall = w <= 768;
-      renderer.setSize(w, h); // Renderer handles the DPR scaling
+      renderer.setSize(w, h);
       program.uniforms.uResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight];
     };
 
@@ -332,12 +314,15 @@ const PrismaticBurst = ({
 
     let io = null;
     if ('IntersectionObserver' in window) {
-      io = new IntersectionObserver(entries => {
-        if (entries[0]) isVisibleRef.current = entries[0].isIntersecting;
-      }, { root: null, threshold: 0.01 });
+      io = new IntersectionObserver(
+        entries => {
+          if (entries[0]) isVisibleRef.current = entries[0].isIntersecting;
+        },
+        { root: null, threshold: 0.01 }
+      );
       io.observe(container);
     }
-    const onVis = () => { };
+    const onVis = () => {};
     document.addEventListener('visibilitychange', onVis);
 
     let raf = 0;
@@ -359,8 +344,8 @@ const PrismaticBurst = ({
       const sm = mouseSmoothRef.current;
       sm[0] += (tgt[0] - sm[0]) * alpha;
       sm[1] += (tgt[1] - sm[1]) * alpha;
-      if (program.uniforms.uMouse) program.uniforms.uMouse.value = sm;
-      if (program.uniforms.uTime) program.uniforms.uTime.value = accumTime;
+      program.uniforms.uMouse.value = sm;
+      program.uniforms.uTime.value = accumTime;
       renderer.render({ scene: meshRef.current });
       raf = requestAnimationFrame(update);
     };
@@ -410,6 +395,7 @@ const PrismaticBurst = ({
 
   useEffect(() => {
     const canvas = rendererRef.current?.gl?.canvas;
+
     if (canvas) {
       canvas.style.mixBlendMode = mixBlendMode && mixBlendMode !== 'none' ? mixBlendMode : '';
     }
@@ -419,20 +405,24 @@ const PrismaticBurst = ({
     const program = programRef.current;
     const renderer = rendererRef.current;
     const gradTex = gradTexRef.current;
-    if (!program || !renderer || !gradTex || !program.uniforms) return;
+    if (!program || !renderer || !gradTex) return;
 
-    if (program.uniforms.uIntensity) program.uniforms.uIntensity.value = intensity ?? 1;
-    if (program.uniforms.uSpeed) program.uniforms.uSpeed.value = speed ?? 1;
+    program.uniforms.uIntensity.value = intensity ?? 1;
+    program.uniforms.uSpeed.value = speed ?? 1;
 
-    const animTypeMap = { rotate: 0, rotate3d: 1, hover: 2 };
-    if (program.uniforms.uAnimType) program.uniforms.uAnimType.value = animTypeMap[animationType ?? 'rotate'];
-    if (program.uniforms.uDistort) program.uniforms.uDistort.value = typeof distort === 'number' ? distort : 0;
+    const animTypeMap = {
+      rotate: 0,
+      rotate3d: 1,
+      hover: 2
+    };
+    program.uniforms.uAnimType.value = animTypeMap[animationType ?? 'rotate'];
+
+    program.uniforms.uDistort.value = typeof distort === 'number' ? distort : 0;
 
     const ox = toPx(offset?.x);
     const oy = toPx(offset?.y);
-    if (program.uniforms.uOffset) program.uniforms.uOffset.value = [ox, oy];
-    if (program.uniforms.uRayCount) program.uniforms.uRayCount.value = Math.max(0, Math.floor(rayCount ?? 0));
-    if (program.uniforms.uSaturation) program.uniforms.uSaturation.value = 1.0;
+    program.uniforms.uOffset.value = [ox, oy];
+    program.uniforms.uRayCount.value = Math.max(0, Math.floor(rayCount ?? 0));
 
     let count = 0;
     if (Array.isArray(colors) && colors.length > 0) {
@@ -462,7 +452,7 @@ const PrismaticBurst = ({
     } else {
       count = 0;
     }
-    if (program.uniforms.uColorCount) program.uniforms.uColorCount.value = count;
+    program.uniforms.uColorCount.value = count;
   }, [intensity, speed, animationType, colors, distort, offset, rayCount]);
 
   return <div className="w-full h-full relative overflow-hidden" ref={containerRef} />;

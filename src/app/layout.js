@@ -77,12 +77,10 @@ export default function RootLayout({ children }) {
         <div className="fixed inset-0 -z-20 bg-background" />
         <div className="fixed inset-0 -z-10">
           <PrismaticBurstWrapper
+            intensity={2}
             animationType="rotate3d"
-            intensity={6}
             speed={0.35}
             paused={false}
-            offset={{ x: 0, y: 0 }}
-            hoverDampness={0.25}
             mixBlendMode="lighten"
           />
         </div>

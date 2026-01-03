@@ -97,11 +97,6 @@ const ServiceCard = ({ title, description, icons, delay }) => {
                         <h4 className="text-xl font-bold text-white tracking-tight">
                             {title}
                         </h4>
-                        {title === "App Development" && (
-                            <span className="text-[10px] font-black text-black bg-yellow-500/90 px-2 py-0.5 rounded-full uppercase tracking-tighter">
-                                Coming Soon
-                            </span>
-                        )}
                     </div>
 
                     <p className="text-white/50 leading-relaxed text-sm font-medium group-hover:text-white/70 transition-colors duration-500">
