@@ -22,7 +22,15 @@ function Navbar() {
                 <div className='flex items-center justify-between'>
                     {/* Logo */}
                     <Link href="/" className='flex items-center gap-4 dark:invert'>
-                        <Image src="/BRXLogo.png" alt="Logo" width={40} height={40} className="w-auto h-7 md:h-10" />
+                        <Image
+                            src="/BRXLogo.png"
+                            alt="BRX Labz"
+                            width={160}
+                            height={160}
+                            quality={100}
+                            priority
+                            className="w-auto h-7 md:h-10"
+                        />
                     </Link>
 
                     {/* Desktop Navigation */}
