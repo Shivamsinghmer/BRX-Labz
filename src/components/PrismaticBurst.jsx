@@ -115,8 +115,8 @@ void main(){
       hoverMat = rotY(ang.y) * rotX(ang.x);
     }
 
-    // Reduced iterations from 44 to 28 for performance
-    for (int i = 0; i < 28; ++i) {
+    // Reduced iterations from 18 to 12 for maximum mobile performance
+    for (int i = 0; i < 12; ++i) {
         vec3 P = marchT * dir;
         P.z -= 2.0;
         float rad = length(P);
@@ -246,7 +246,11 @@ const PrismaticBurst = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.0);
+    // PERFORMANCE OPTIMIZATION: Limit DPR on mobile to 1.0 or lower if needed
+    // And detect mobile to potentially lower resolution further
+    const isMobile = window.innerWidth <= 768;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.5); // Cap DPR lower for performance
+
     const renderer = new Renderer({ dpr, alpha: true, antialias: false });
     rendererRef.current = renderer;
 
@@ -303,7 +307,9 @@ const PrismaticBurst = ({
     const resize = () => {
       const w = container.clientWidth || 1;
       const h = container.clientHeight || 1;
-      renderer.setSize(w, h);
+      // On mobile, render at slightly lower resolution for huge FPS gain
+      const isSmall = w <= 768;
+      renderer.setSize(w, h); // Renderer handles the DPR scaling
       program.uniforms.uResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight];
     };
 

@@ -1,6 +1,4 @@
-import Link from "next/link";
-import { ReactNode } from "react";
-
+"use client"
 import {
     Accordion,
     AccordionContent,
@@ -8,151 +6,81 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Section } from "@/components/ui/Section";
-
-
+import { motion } from "motion/react";
 
 export default function FAQ({
-    title = "Questions and Answers",
-    items = [
-        {
-            question:
-                "Why building a great landing page is critical for your business?",
-            answer: (
-                <>
-                    <p className="text-muted-foreground mb-4 max-w-[640px] text-balance">
-                        In today&apos;s AI-driven world, standing out is harder than ever.
-                        While anyone can build a product, a professional landing page makes
-                        the difference between success and failure.
-                    </p>
-                    <p className="text-muted-foreground mb-4 max-w-[640px] text-balance">
-                        Launch UI helps you ship faster without compromising on quality.
-                    </p>
-                </>
-            ),
-        },
-        {
-            question: "Why use Launch UI instead of a no-code tool?",
-            answer: (
-                <>
-                    <p className="text-muted-foreground mb-4 max-w-[600px]">
-                        No-code tools lock you into their ecosystem with recurring fees and
-                        limited control. They often come with performance issues and make it
-                        difficult to integrate with your product.
-                    </p>
-                    <p className="text-muted-foreground mb-4 max-w-[600px]">
-                        You can&apos;t even change your hosting provider and basic things
-                        like web analytics come as extra costs and paid add-ons.
-                    </p>
-                    <p className="text-muted-foreground mb-4 max-w-[600px]">
-                        What might seem like a convenient solution today could paint you
-                        into a corner tomorrow, limiting your ability to scale and adapt.
-                        Launch UI gives you full control of your code while maintaining
-                        professional quality.
-                    </p>
-                </>
-            ),
-        },
-        {
-            question:
-                "How Launch UI is different from other components libraries and templates?",
-            answer: (
-                <>
-                    <p className="text-muted-foreground mb-4 max-w-[580px]">
-                        Launch UI stands out with premium design quality and delightful
-                        touches of custom animations and illustrations.
-                    </p>
-                    <p className="text-muted-foreground mb-4 max-w-[580px]">
-                        All components are carefully crafted to help position your product
-                        as a professional tool, avoiding the generic template look.
-                    </p>
-                    <p className="text-muted-foreground mb-4 max-w-[640px] text-balance">
-                        Unlike many libraries that rely on outdated CSS practices and old
-                        dependencies, Launch UI is built with modern technologies and best
-                        practices in mind.
-                    </p>
-                </>
-            ),
-        },
-        {
-            question: 'Why exactly does it mean that "The code is yours"?',
-            answer: (
-                <>
-                    <p className="text-muted-foreground mb-4 max-w-[580px]">
-                        The basic version of Launch UI is open-source and free forever,
-                        under a do-whatever-you-want license.
-                    </p>
-                    <p className="text-muted-foreground mb-4 max-w-[580px]">
-                        The pro version that contains more components and options is a
-                        one-time purchase that gives you lifetime access to all current and
-                        future content. Use it for unlimited personal and commercial
-                        projects - no recurring fees or restrictions.
-                    </p>
-                    <p className="text-muted-foreground mb-4 max-w-[580px]">
-                        For complete details about licensing and usage rights, check out{" "}
-                        <Link href="/pricing" className="text-foreground underline">
-                            the pricing page
-                        </Link>
-                        .
-                    </p>
-                </>
-            ),
-        },
-        {
-            question: "Are Figma files included?",
-            answer: (
-                <p className="text-muted-foreground mb-4 max-w-[580px]">
-                    Yes! The complete Launch UI template is available for free on the{" "}
-                    <Link
-                        href="https://www.figma.com/community/file/1420131743903900629/launch-ui-landing-page-components-ui-kit"
-                        className="text-foreground underline"
-                    >
-                        Figma community
-                    </Link>
-                    .
-                </p>
-            ),
-        },
-        {
-            question: "Can I get a discount?",
-            answer: (
-                <>
-                    <p className="text-muted-foreground mb-4 max-w-[580px]">
-                        Actually, yes! I&apos;m always acively looking for beta testers of
-                        new features. If you are interested in exchanging feedback for a
-                        discount, please contact me via{" "}
-                        <a
-                            href="mailto:mershivam02@gmail.com"
-                            className="underline underline-offset-2"
-                        >
-                            email
-                        </a>
-                        .
-                    </p>
-                </>
-            ),
-        },
-    ],
+    title = "Frequently Asked Questions",
+    items,
     className,
 }) {
     return (
-        <Section className={className}>
-            <div className="max-w-container mx-auto flex flex-col items-center gap-8">
-                <h2 className="text-center text-2xl font-semibold sm:text-4xl">
-                    {title}
-                </h2>
-                {items !== false && items.length > 0 && (
-                    <Accordion type="single" collapsible className="w-full max-w-[800px]">
-                        {items.map((item, index) => (
-                            <AccordionItem
-                                key={index}
-                                value={item.value || `item-${index + 1}`}
-                            >
-                                <AccordionTrigger>{item.question}</AccordionTrigger>
-                                <AccordionContent>{item.answer}</AccordionContent>
-                            </AccordionItem>
-                        ))}
-                    </Accordion>
-                )}
+        <Section id="faqs" className={`${className} relative overflow-hidden`}>
+            {/* Background Atmosphere */}
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-125 h-125 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-0 right-0 w-125 h-125 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+            <div className="container mx-auto px-6 relative z-10">
+                {/* Header */}
+                <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="inline-flex items-center px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md"
+                    >
+                        <span className="text-[11px] font-bold text-white/60 uppercase tracking-widest">Support</span>
+                    </motion.div>
+
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-[1.1]"
+                    >
+                        Got Questions? <br />
+                        <span className="text-white/20">We&apos;ve Got Answers.</span>
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                        className="text-white/40 max-w-xl mx-auto text-sm md:text-base font-medium"
+                    >
+                        Everything you need to know about working with BRX Labz.
+                        Can&apos;t find what you&apos;re looking for? Feel free to reach out.
+                    </motion.p>
+                </div>
+
+                {/* FAQ Content */}
+                <div className="max-w-4xl mx-auto">
+                    {items !== false && items.length > 0 && (
+                        <Accordion type="single" collapsible className="w-full space-y-4">
+                            {items.map((item, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                >
+                                    <AccordionItem
+                                        value={item.value || `item-${index + 1}`}
+                                        className="border border-white/10 bg-white/2 backdrop-blur-xl rounded-2xl px-6 transition-all duration-300 hover:bg-white/4 hover:border-white/20 mb-4 overflow-hidden"
+                                    >
+                                        <AccordionTrigger className="text-left text-white/80 hover:text-white font-semibold py-6 transition-all decoration-transparent hover:no-underline">
+                                            {item.question}
+                                        </AccordionTrigger>
+                                        <AccordionContent className="text-white/50 leading-relaxed pb-6">
+                                            {item.answer}
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                </motion.div>
+                            ))}
+                        </Accordion>
+                    )}
+                </div>
             </div>
         </Section>
     );

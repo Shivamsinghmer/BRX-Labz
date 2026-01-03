@@ -5,41 +5,41 @@ import {
     FooterColumn,
     FooterContent,
 } from "@/components/ui/footer";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import BRXLabs from "@/components/BRXLabs";
+import BRXLabz from "@/components/BRXLabz";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { ArrowUpRight } from "lucide-react";
 
 export default function FooterSection({
-    logo = <BRXLabs />,
-    name = "BRX Labs",
+    logo = <BRXLabz />,
+    name = "BRX Labz",
     columns = [
         {
             title: "Navigation",
             links: [
-                { text: "Our Work", href: "#" },
-                { text: "Services", href: "#" },
-                { text: "Process", href: "#" },
+                { text: "Our Work", href: "/#work" },
+                { text: "Services", href: "/#services" },
+                { text: "Process", href: "/#approach" },
+                { text: "Pricing", href: "/#pricing" },
             ],
         },
         {
             title: "Company",
             links: [
-                { text: "About", href: "#" },
-                { text: "Careers", href: "#" },
-                { text: "Mission", href: "#" },
+                { text: "Testimonials", href: "/#testimonials" },
+                { text: "Careers", href: "/careers" },
+                { text: "FAQs", href: "/#faqs" },
             ],
         },
         {
             title: "Socials",
             links: [
-                { text: "LinkedIn", href: "#" },
-                { text: "Twitter / X", href: "#" },
-                { text: "Instagram", href: "#" },
+                { text: "LinkedIn", href: "https://linkedin.com" },
+                { text: "Twitter / X", href: "https://x.com" },
+                { text: "Instagram", href: "https://instagram.com" },
             ],
         },
     ],
-    copyright = `© ${new Date().getFullYear()} BRX Labs. All rights reserved.`,
+    copyright = `© ${new Date().getFullYear()} BRX Labz. All rights reserved.`,
     policies = [
         { text: "Privacy Policy", href: "#" },
         { text: "Terms of Service", href: "#" },
@@ -91,8 +91,8 @@ export default function FooterSection({
                 </FooterContent>
 
                 <div className="w-full relative py-12 border-t border-white/5">
-                    <div className="absolute inset-0 flex items-center justify-center select-none h-30 overflow-hidden">
-                        <TextHoverEffect text="BRX LABS" />
+                    <div className="absolute -inset-8 flex items-center justify-center select-none h-48 overflow-hidden">
+                        <TextHoverEffect text="BRX LABZ" />
                     </div>
 
                     <FooterBottom className="relative z-20 flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t-0">
@@ -112,11 +112,6 @@ export default function FooterSection({
                                     </a>
                                 ))}
                             </div>
-                            {showModeToggle && (
-                                <div className="pl-6 border-l border-white/10">
-                                    <ModeToggle />
-                                </div>
-                            )}
                         </div>
                     </FooterBottom>
                 </div>

@@ -4,56 +4,15 @@ import Image from 'next/image'
 import { motion } from "motion/react"
 import { ExternalLink, ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { projects } from "../data/projects.js"
 
-const projects = [
-  {
-    title: "Softwater Technologies",
-    description: "A professional landing page and platform for industrial water treatment solutions, focused on clarity and lead generation.",
-    category: "FREELANCE",
-    image: "/OurProjects/Softwater.png",
-    tags: ["Nextjs", "TailwindCSS", "Framer Motion"],
-    link: "https://www.softwatertech.in"
-  },
-  {
-    title: "Developer Portfolio",
-    description: "A high-performance personal portfolio featuring elite-grade animations, bento layouts, and smooth navigation.",
-    category: "PERSONAL",
-    image: "/OurProjects/Portfolio-Shivam.png",
-    tags: ["Nextjs", "TypeScript", "Three.js"],
-    link: "https://shivamsinghmer.vercel.app/"
-  },
-  {
-    title: "NewsTrace",
-    description: "An AI-powered news aggregator that tracks media bias and provides timeline-based event tracing.",
-    category: "AGENCY",
-    image: "/OurProjects/NewsTrace.png",
-    tags: ["Nextjs", "AI/ML", "Python"],
-    link: "https://news-trace.vercel.app/"
-  },
-  {
-    title: "Resumind",
-    description: "An intelligent platform for resume building and job matching using advanced NLP algorithms.",
-    category: "PRODUCT",
-    image: "/OurProjects/Resumind.png",
-    tags: ["React", "Node.js", "PostgreSQL"],
-    link: "https://ai-resume-analyzer-pied-nine.vercel.app/"
-  },
-  {
-    title: "ZORA",
-    description: "A luxury brand identity and digital experience for high-end fashion, focused on aesthetic excellence.",
-    category: "FREELANCE",
-    image: "/OurProjects/ZORA.png",
-    tags: ["Reactjs", "Shopify", "Motion"],
-    link: "https://xoraweb.netlify.app/"
-  }
-]
 
 import { Marquee } from "@/components/ui/marquee"
 
 const ProjectCard = ({ project }) => {
   return (
     <motion.div
-      className="group relative flex flex-col w-80 md:w-96 bg-white/5 border border-white/10 rounded-4xl overflow-hidden hover:bg-white/8 hover:border-white/20 transition-all duration-500 mx-4"
+      className="group relative flex flex-col w-[280px] md:w-96 bg-white/5 border border-white/10 rounded-4xl overflow-hidden hover:bg-white/8 hover:border-white/20 transition-all duration-500 mx-3 md:mx-4"
     >
       {/* Image Section */}
       <div className="relative h-48 md:h-52 overflow-hidden">
@@ -61,6 +20,7 @@ const ProjectCard = ({ project }) => {
           src={project.image}
           alt={project.title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-60" />
@@ -154,11 +114,11 @@ const ProjectsSection = () => {
         </Marquee>
 
         {/* Fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-linear-to-r from-black via-black/40 to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-linear-to-l from-black via-black/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/6 bg-linear-to-r from-black via-black/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/6 bg-linear-to-l from-black via-black/0 to-transparent" />
       </div>
 
-     
+
     </section>
   )
 }

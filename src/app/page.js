@@ -1,12 +1,15 @@
+import dynamic from 'next/dynamic'
 import HeroSection from '@/sections/HeroSection'
-import Pricing from '@/sections/Pricing'
-import ProjectsMain from '@/sections/ProjectsSection'
-import { Testimonials } from '@/sections/Testimonials'
-import ApproachSection from '@/sections/ApproachSection'
-import React from 'react'
-import ProjectsMarque from '@/sections/ProjectsMarque'
-import OurServices from '@/sections/OurServices'
-import Faqs from '@/sections/Faqs'
+import { faqs } from '@/data/FAQs.js'
+
+// Dynamic Imports for code splitting
+const ProjectsMain = dynamic(() => import('@/sections/ProjectsSection'))
+const Pricing = dynamic(() => import('@/sections/Pricing'))
+const Testimonials = dynamic(() => import('@/sections/Testimonials').then(mod => mod.Testimonials))
+const ApproachSection = dynamic(() => import('@/sections/ApproachSection'))
+const ProjectsMarque = dynamic(() => import('@/sections/ProjectsMarque'))
+const OurServices = dynamic(() => import('@/sections/OurServices'))
+const Faqs = dynamic(() => import('@/sections/Faqs'))
 
 const Page = () => {
   return (
@@ -18,7 +21,7 @@ const Page = () => {
       <ProjectsMain />
       <Testimonials />
       <Pricing />
-      <Faqs /> 
+      <Faqs items={faqs} />
     </>
   )
 }

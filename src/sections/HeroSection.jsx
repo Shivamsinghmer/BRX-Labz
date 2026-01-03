@@ -17,7 +17,7 @@ const HeroSection = () => {
             {/* Main Content */}
             <div className="max-w-4xl w-full text-center space-y-4">
                 <h2 className="text-lg md:text-lg font-medium tracking-widest text-primary/60 dark:text-primary/40 uppercase animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-100">
-                    Building. Refining. Xcelerating.
+                    <span className="text-5xl font-extrabold">B</span>uilding. <span className="text-5xl font-extrabold">R</span>efining. <span className="text-5xl font-extrabold">X</span>celerating.
                 </h2>
 
                 <h1 className="text-3xl md:text-6xl font-black tracking-tight leading-tight bg-clip-text text-transparent bg-linear-to-b from-primary to-primary/60 dark:from-white dark:to-white/40 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
@@ -29,12 +29,12 @@ const HeroSection = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-400">
-                    <Link href="https://cal.com/shivam-singh-mer-f1rqse/30min">
+                    <Link href="https://cal.com/brx-labz/30min">
                         <InteractiveHoverButton className="dark:invert dark:border-none dark:text-primary h-12 px-8 text-base">
                             Start Your Project
                         </InteractiveHoverButton>
                     </Link>
-                    <Link href="/projects" className="h-12 px-8 rounded-full text-center flex items-center justify-center border border-primary/10 bg-primary/5 backdrop-blur-md font-bold hover:bg-primary/10 transition-all active:scale-95 text-primary text-sm">
+                    <Link href="#work" className="h-12 px-8 rounded-full text-center flex items-center justify-center border border-primary/10 bg-primary/5 backdrop-blur-md font-bold hover:bg-primary/10 transition-all active:scale-95 text-primary text-sm">
                         View Our Work
                     </Link>
                 </div>

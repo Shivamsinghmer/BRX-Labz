@@ -7,10 +7,10 @@ import { Menu, X } from "lucide-react"
 import { InteractiveHoverButton } from './ui/interactive-hover-button'
 
 const navLinks = [
-    { name: "Our Work", href: "#work" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Testimonials", href: "#testimonials" },
-    { name: "FAQs", href: "#faqs" },
+    { name: "Our Work", href: "/#work" },
+    { name: "Pricing", href: "/#pricing" },
+    { name: "FAQs", href: "/#faqs" },
+    { name: "Careers", href: "/careers" },
 ]
 
 function Navbar() {
@@ -18,11 +18,11 @@ function Navbar() {
 
     return (
         <>
-            <div className='sticky top-8 z-50 md:w-[60%] lg:w-[50%] px-4 w-[95%] mx-auto rounded-3xl p-2 from-card/100 to-card/20 dark:border-border/10 dark:border-t-border/10 dark:from-primary/5 dark:to-primary/2 bg-white/15 backdrop-blur-3xl dark:border-b-0'>
+            <div className='sticky top-4 md:top-8 z-50 md:w-[70%] lg:w-[50%] px-4 w-[92%] mx-auto rounded-3xl p-2 from-card/100 to-card/20 dark:border-border/10 dark:border-t-border/10 dark:from-primary/5 dark:to-primary/2 bg-white/10 backdrop-blur-md dark:border-b-0 shadow-2xl'>
                 <div className='flex items-center justify-between'>
                     {/* Logo */}
                     <Link href="/" className='flex items-center gap-4 dark:invert'>
-                        <Image src="/BRXLogo.png" alt="Logo" width={45} height={45} className="w-auto h-8 md:h-10" />
+                        <Image src="/BRXLogo.png" alt="Logo" width={40} height={40} className="w-auto h-7 md:h-10" />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -40,7 +40,7 @@ function Navbar() {
 
                     {/* Actions */}
                     <div className="flex items-center gap-2">
-                        <Link href="https://cal.com/shivam-singh-mer-f1rqse/30min" className='hidden sm:flex items-center'>
+                        <Link href="https://cal.com/brx-labz/30min" className='hidden sm:flex items-center'>
                             <InteractiveHoverButton className="dark:invert dark:border-none dark:text-primary h-9 px-5 text-xs">
                                 Book a Call
                             </InteractiveHoverButton>
@@ -91,7 +91,7 @@ function Navbar() {
                                     className="pt-4 border-t border-white/5"
                                 >
                                     <Link
-                                        href="https://cal.com/shivam-singh-mer-f1rqse/30min"
+                                        href="https://cal.com/brx-labz/30min"
                                         onClick={() => setIsOpen(false)}
                                         className="w-full h-12 flex items-center justify-center bg-white text-black rounded-2xl font-black uppercase text-sm"
                                     >

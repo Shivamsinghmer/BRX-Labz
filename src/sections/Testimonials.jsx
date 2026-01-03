@@ -1,45 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { Marquee } from "@/components/ui/marquee"
+import { reviews } from "../data/reviews.js"
 
-const reviews = [
-  {
-    name: "Alex Rivera",
-    username: "@arivera",
-    body: "The transformation of our digital presence was nighttime and daylight. BRX Studios delivered beyond our expectations.",
-    img: "https://avatar.vercel.sh/alex",
-  },
-  {
-    name: "Sarah Chen",
-    username: "@sarahc",
-    body: "Finally a studio that understands the intersection of high-end design and actual conversion metrics. Simply brilliant.",
-    img: "https://avatar.vercel.sh/sarah",
-  },
-  {
-    name: "Marcus Thorne",
-    username: "@mthorne",
-    body: "Their attention to detail and algorithmic approach to design is something I haven't seen elsewhere in the industry.",
-    img: "https://avatar.vercel.sh/marcus",
-  },
-  {
-    name: "Elena Vance",
-    username: "@evance",
-    body: "From 'Building' to 'Xcelerating', the name says it all. Our site load speeds and engagement have tripled.",
-    img: "https://avatar.vercel.sh/elena",
-  },
-  {
-    name: "David Park",
-    username: "@dpark",
-    body: "The prismatic background and overall aesthetic they created for us is a constant talking point for our clients.",
-    img: "https://avatar.vercel.sh/david",
-  },
-  {
-    name: "Julia Smith",
-    username: "@jsmith",
-    body: "Working with BRX was a breeze. They take complex requirements and turn them into elegant, functional digital assets.",
-    img: "https://avatar.vercel.sh/julia",
-  },
-]
 
 const firstRow = reviews.slice(0, reviews.length / 2)
 const secondRow = reviews.slice(reviews.length / 2)
@@ -55,12 +19,14 @@ const ReviewCard = ({ img, name, username, body }) => {
     >
       <div className="flex flex-row items-center gap-3">
         <div className="relative h-10 w-10 shrink-0">
-          <img
-            className="rounded-full border border-white/20 object-cover w-full h-full"
+          <Image
+            className="rounded-full border border-white/20 object-cover"
             alt={name}
             src={img}
+            fill
+            sizes="40px"
           />
-          <div className="absolute inset-0 rounded-full bg-linear-to-tr from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 rounded-full bg-linear-to-tr from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10" />
         </div>
         <div className="flex flex-col">
           <figcaption className="text-sm font-semibold text-white/90">
@@ -97,11 +63,11 @@ export function Testimonials() {
         </h2>
         <div className="h-0.5 w-14 bg-linear-to-r from-blue-500 to-purple-600 mx-auto rounded-full mb-6 shadow-[0_0_20px_rgba(59,130,246,0.3)]" />
         <p className="text-white/50 text-sm md:text-base max-w-lg mx-auto font-medium">
-          Hear from the founders and creators who have redefined their digital standard with BRX Studios.
+          Hear from the founders and creators who have redefined their digital standard with BRX Labz.
         </p>
       </div>
 
-      <div className="relative flex w-3/4 flex-col items-center justify-center overflow-hidden">
+      <div className="relative flex w-full md:w-3/4 flex-col items-center justify-center overflow-hidden">
         <Marquee pauseOnHover className="[--duration:40s] [--gap:2rem] py-4">
           {firstRow.map((review) => (
             <ReviewCard key={review.username} {...review} />
