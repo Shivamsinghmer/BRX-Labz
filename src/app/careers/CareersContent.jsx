@@ -56,52 +56,50 @@ const CareerCard = ({ job, index }) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.23, 1, 0.32, 1] }}
             className="group relative"
         >
             <Link
                 href={job.link}
-                className="relative block p-8 rounded-[2rem] border border-white/5 bg-white/[0.01] backdrop-blur-xl transition-all duration-500 hover:border-white/10 overflow-hidden"
+                className="relative block p-5 rounded-[2.5rem] border border-white/5 bg-white/[0.02] backdrop-blur-2xl transition-all duration-500 hover:border-white/20 hover:bg-white/[0.04] overflow-hidden"
             >
-                {/* Hover Glow Effect */}
+                {/* Animated Gradient Background */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                    <div className="absolute -top-1/2 -left-1/2 w-full h-full bg-blue-500/10 blur-[100px] animate-pulse" />
-                    <div className="absolute -bottom-1/2 -right-1/2 w-full h-full bg-purple-500/10 blur-[100px] animate-pulse" />
+                    <div className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-blue-500/10 blur-[120px] rounded-full animate-pulse" />
+                    <div className="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] bg-purple-500/10 blur-[120px] rounded-full animate-pulse" />
                 </div>
 
-                <div className="relative z-10 flex flex-col md:flex-row gap-8">
+                <div className="relative z-10 flex flex-col lg:flex-row gap-10">
                     {/* Icon Section */}
                     <div className="shrink-0">
-                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:border-yellow-500/30 transition-all duration-500">
-                            <Icon className="w-8 h-8 text-yellow-500 group-hover:animate-pulse" />
+                        <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:border-white/30 transition-all duration-500 shadow-2xl">
+                            <Icon className="w-9 h-9 text-white/70 group-hover:text-white transition-colors duration-500" />
                         </div>
                     </div>
 
                     {/* Content Section */}
-                    <div className="flex-1 space-y-4">
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-yellow-500 transition-colors duration-300">
+                    <div className="flex-1 flex flex-col justify-center">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-4">
+                            <h3 className="text-xl font-bold text-white tracking-tight group-hover:translate-x-1 transition-transform duration-300">
                                 {job.title}
                             </h3>
                             <div className="flex flex-wrap gap-2">
                                 {job.tags.map(tag => (
-                                    <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold text-white/40 uppercase tracking-widest whitespace-nowrap">
+                                    <span key={tag} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[9px] font-bold text-white/60 uppercase tracking-[0.15em] backdrop-blur-md group-hover:border-white/20 transition-colors">
                                         {tag}
                                     </span>
                                 ))}
                             </div>
                         </div>
 
-                        <p className="text-white/40 text-base leading-relaxed max-w-2xl font-medium group-hover:text-white/60 transition-colors duration-300">
+                        <p className="text-white/50 text-md leading-relaxed max-w-3xl font-light group-hover:text-white/80 transition-colors duration-300 mb-8">
                             {job.description}
                         </p>
 
-                        <div className="pt-4 flex items-center gap-2 text-yellow-500 font-bold text-sm tracking-tight group/btn transition-all">
-                            <span className="relative overflow-hidden inline-block">
-                                <span className="inline-block transition-transform duration-300 group-hover/btn:-translate-y-full lowercase">Apply now</span>
-                                <span className="absolute top-full left-0 inline-block transition-transform duration-300 group-hover/btn:-translate-y-full lowercase">Apply now</span>
-                            </span>
-                            <ArrowRight className="w-4 h-4 translate-y-[0.5px] group-hover/btn:translate-x-1 transition-transform" />
+                        <div className="flex items-center gap-3 text-white/40 group-hover:text-white transition-all duration-300">
+                            <div className="h-[1px] w-12 bg-white/10 group-hover:w-20 group-hover:bg-white/40 transition-all duration-500" />
+                            <span className="text-xs  uppercase tracking-[0.2em]">Apply Position</span>
+                            <ArrowRight className="w-4 h-4 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500" />
                         </div>
                     </div>
                 </div>
@@ -117,20 +115,22 @@ const PerkCard = ({ perk, index }) => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="p-8 rounded-[2.5rem] bg-white/[0.02] backdrop-blur-lg border border-white/5 hover:border-white/10 transition-all duration-300 group"
+            className="p-8 rounded-[2.5rem] bg-white/[0.03] backdrop-blur-lg border border-white/5 hover:border-white/20 hover:bg-white/[0.06] transition-all duration-300 group"
         >
-            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-white/60 mb-6 group-hover:scale-110 group-hover:text-white transition-all">
+            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-white/60 mb-6 group-hover:scale-110 group-hover:bg-white/10 group-hover:text-white transition-all">
                 <perk.icon className="w-6 h-6" />
             </div>
             <h4 className="text-xl font-bold text-white mb-3 tracking-tight">{perk.title}</h4>
-            <p className="text-sm text-white/30 font-medium leading-relaxed group-hover:text-white/40 transition-colors">{perk.desc}</p>
+            <p className="text-sm text-white/50 font-medium leading-relaxed group-hover:text-white/70 transition-colors">{perk.desc}</p>
         </motion.div>
     )
 }
 
 export default function CareersContent() {
     return (
-        <main className="min-h-screen">
+        <main className="min-h-screen relative ">
+            {/* Global Noise Texture */}
+            <div className="fixed inset-0 z-[1] pointer-events-none opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
             {/* Hero Section with Moving Atmosphere */}
             <Section className="relative pt-40 min-h-screen pb-32 overflow-hidden">
                 {/* Ultra-Premium Background Effects */}
@@ -150,16 +150,16 @@ export default function CareersContent() {
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                             </span>
-                            <span className="text-[12px] font-bold text-white/80 uppercase tracking-[0.2em] shadow-sm">Career At BRX Labz</span>
+                            <span className="text-[10px] font-bold text-white/80 uppercase tracking-[0.2em] shadow-sm">Career At BRX Labz</span>
                         </motion.div>
 
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="text-6xl md:text-9xl font-black text-white leading-none tracking-tighter"
+                            className="text-6xl md:text-8xl font-black text-white leading-none tracking-tighter"
                         >
-                            <span className="block italic">Build Learn</span>
+                            <span className="block italic bg-clip-text text-transparent bg-linear-to-b from-white to-white/60">Build Learn</span>
                             <span className="text-white/20">Ship.</span>
                         </motion.h1>
 
@@ -167,7 +167,7 @@ export default function CareersContent() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
-                            className="text-xl md:text-xl text-white/40 max-w-3xl mx-auto font-medium leading-relaxed tracking-tight"
+                            className="text-lg md:text-lg text-white/40 max-w-3xl mx-auto font-medium leading-relaxed tracking-tight"
                         >
                             We&lsquo;re building a world-class team of designers and engineers to create the next generation of digital excellence. High speed, high quality, zero fluff.
                         </motion.p>
@@ -176,20 +176,18 @@ export default function CareersContent() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="pt-10 flex flex-wrap justify-center gap-12 text-white/20 font-black uppercase text-xs tracking-widest italic"
+                            className="pt-8 flex flex-wrap justify-center gap-4"
                         >
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-white/5" />
-                                Remote First
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-white/5" />
-                                Rapid Scale
-                            </div>
-                            <div className="flex items-center gap-2">
-                                <CheckCircle2 className="w-4 h-4 text-white/5" />
-                                High Impact
-                            </div>
+                            {[
+                                "Remote First",
+                                "Rapid Scale",
+                                "High Impact"
+                            ].map((item, index) => (
+                                <div key={index} className="flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-white/5 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors">
+                                    <CheckCircle2 className="w-4 h-4 text-green-400" />
+                                    <span className="text-xs font-bold text-white/80 uppercase tracking-widest">{item}</span>
+                                </div>
+                            ))}
                         </motion.div>
                     </div>
                 </div>
@@ -276,7 +274,7 @@ export default function CareersContent() {
                             href="https://forms.gle/WMeHUBPRMePCMCfE9"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="inline-block px-8 py-4 rounded-full bg-yellow-500 text-black font-black text-sm uppercase tracking-[0.2em] shadow-[0_0_40px_rgba(251,191,36,0.2)] hover:shadow-[0_0_60px_rgba(251,191,36,0.4)] transition-all"
+                            className="inline-block px-8 py-4 rounded-full bg-gray-300 text-black font-black text-sm uppercase tracking-[0.2em] shadow-[0_0_40px_rgba(251,191,36,0.2)] hover:shadow-[0_0_60px_rgba(251,191,36,0.4)] transition-all"
                         >
                             General Application
                         </motion.a>

@@ -6,12 +6,12 @@ const HeroSection = () => {
     return (
         <section className="relative min-h-screen w-full flex flex-col items-center justify-center  pb-12 px-4 overflow-hidden">
             {/* Availability Badge */}
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <div className="flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
                 <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                 </span>
-                <span className="text-sm font-medium tracking-wide dark:text-primary/80 uppercase">Available for new Projects</span>
+                <span className="text-xs font-medium tracking-wide dark:text-primary/80 uppercase">Available for new Projects</span>
             </div>
 
             {/* Main Content */}
