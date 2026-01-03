@@ -1,8 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BRX Labz
 
-## Getting Started
+A premium, high-performance web application designed for BRX Studios, built with modern web technologies to deliver an immersive user experience. This project showcases advanced animations, 3D elements, and a responsive design.
 
-First, run the development server:
+## 🚀 Technologies Used
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Directory)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations**:
+  - [GSAP](https://gsap.com/)
+  - [Framer Motion](https://www.framer.com/motion/)
+- **3D Graphics**: [OGL](https://github.com/oframe/ogl)
+- **Icons**: [Lucide React](https://lucide.dev/)
+
+## ✨ Features
+
+- **Dynamic Hero Section**: Engaging first impression with smooth animations.
+- **Projects Showcase**: Interactive marquee and grid layouts to display portfolio cases.
+- **Services Overview**: Detailed breakdown of offered services.
+- **Testimonials**: Social proof with a premium design.
+- **Pricing Plans**: Clear and attractive pricing tables.
+- **FAQ Section**: Accordion-style frequently asked questions.
+- **Performance Optimized**: Code splitting with dynamic imports for fast load times.
+
+## 🛠️ Getting Started
+
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +42,20 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📂 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The project follows the standard Next.js App Router structure:
 
-## Learn More
+- `src/app`: Page routes and layouts.
+- `src/components`: Reusable UI components.
+- `src/sections`: Major sections of the landing page (Hero, Projects, Services, etc.).
+- `src/data`: Static data files (FAQs, etc.).
+- `public`: Static assets (images, fonts).
 
-To learn more about Next.js, take a look at the following resources:
+## 📄 License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is proprietary to BRX Studios.
