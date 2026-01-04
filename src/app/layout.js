@@ -65,6 +65,7 @@ export const metadata = {
 };
 
 import PrismaticBurstWrapper from "@/components/PrismaticBurstWrapper";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export default function RootLayout({ children }) {
   return (
@@ -97,10 +98,12 @@ export default function RootLayout({ children }) {
             mixBlendMode="lighten"
           />
         </div>
-        <div className="relative z-10 min-h-screen">
-          {children}
-        </div>
-        <Footer />
+        <SmoothScroll>
+          <div className="relative z-10 min-h-screen">
+            {children}
+          </div>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
