@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brxlabz.vercel.app/sitemap.xml
