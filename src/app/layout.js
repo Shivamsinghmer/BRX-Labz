@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -24,7 +25,7 @@ export const metadata = {
     template: "%s | BRX Labz"
   },
   description: "BRX Labz is a elite digital studio synthesizing code and design into high-converting experiences. We build websites, apps, and brands that scale.",
-  keywords: ["BRX Labz","BRX","BRX Studios","Digital Studio", "Web Development", "UI/UX Design", "Next.js Agency", "React Developer", "Mobile App Development", "Branding", "SaaS Design"],
+  keywords: ["BRX Labz", "BRX", "BRX Studios", "Digital Studio", "Web Development", "UI/UX Design", "Next.js Agency", "React Developer", "Mobile App Development", "Branding", "SaaS Design"],
   authors: [{ name: "BRX Labz" }],
   creator: "BRX Labz",
   openGraph: {
@@ -71,6 +72,18 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable}  ${geistMono.variable} antialiased selection:bg-black/10 dark`}
       >
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-RXMXEPPC51"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RXMXEPPC51');
+          `}
+        </Script>
         <Preloader />
         <FloatingContact />
         <Navbar />
