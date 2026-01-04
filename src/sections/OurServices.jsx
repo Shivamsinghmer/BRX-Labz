@@ -186,7 +186,7 @@ const OurServices = () => {
                 {/* Footer Buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                     <Link href="https://cal.com/brx-labz/30min"><InteractiveHoverButton
-                        className="flex dark:invert dark:border-none border-none dark:hover:border-none items-center gap-2 px-6 py-3 bg-black rounded-full hover:bg-neutral-900 transition-all font-bold text-white shadow-2xl group text-sm"
+                        className="flex invert border-none border-none hover:border-none items-center gap-2 px-6 py-3 bg-black rounded-full hover:bg-neutral-900 transition-all font-bold text-white shadow-2xl group text-sm"
                     >
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                         Book Strategy Call

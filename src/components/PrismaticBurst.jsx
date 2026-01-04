@@ -200,7 +200,7 @@ const toPx = v => {
 };
 
 const PrismaticBurst = ({
-  intensity ,
+  intensity,
   speed = 0.5,
   animationType = 'rotate3d',
   colors,
@@ -234,8 +234,10 @@ const PrismaticBurst = ({
     const container = containerRef.current;
     if (!container) return;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const renderer = new Renderer({ dpr, alpha: false, antialias: false });
+    // Limit DPR to 1 on mobile/tablet to save performance, max 1.5 on desktop
+    const isMobile = window.innerWidth < 768;
+    const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
+    const renderer = new Renderer({ dpr, alpha: false, antialias: false, depth: false });
     rendererRef.current = renderer;
 
     const gl = renderer.gl;
@@ -261,9 +263,15 @@ const PrismaticBurst = ({
     gradientTex.wrapT = gl.CLAMP_TO_EDGE;
     gradTexRef.current = gradientTex;
 
+    const steps = window.innerWidth < 768 ? 22 : 44;
+    const modifiedFragmentShader = fragmentShader.replace(
+      'for (int i = 0; i < 44; ++i)',
+      `for (int i = 0; i < ${steps}; ++i)`
+    );
+
     const program = new Program(gl, {
       vertex: vertexShader,
-      fragment: fragmentShader,
+      fragment: modifiedFragmentShader,
       uniforms: {
         uResolution: { value: [1, 1] },
         uTime: { value: 0 },
@@ -322,7 +330,7 @@ const PrismaticBurst = ({
       );
       io.observe(container);
     }
-    const onVis = () => {};
+    const onVis = () => { };
     document.addEventListener('visibilitychange', onVis);
 
     let raf = 0;

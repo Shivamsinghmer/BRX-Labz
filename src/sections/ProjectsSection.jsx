@@ -2,7 +2,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { motion } from "motion/react"
-import { ExternalLink, ArrowUpRight } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { projects } from "../data/projects.js"
 

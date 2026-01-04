@@ -18,10 +18,10 @@ function Navbar() {
 
     return (
         <>
-            <div className='sticky top-4 md:top-8 z-50 md:w-[70%] lg:w-[50%] px-4 w-[92%] mx-auto rounded-3xl p-2 from-card/100 to-card/20 dark:border-border/10 dark:border-t-border/10 dark:from-primary/5 dark:to-primary/2 bg-white/10 backdrop-blur-md dark:border-b-0 shadow-2xl'>
+            <div className='sticky top-4 md:top-8 z-50 md:w-[70%] lg:w-[50%] px-4 w-[92%] mx-auto rounded-3xl p-2 from-card/100 to-card/20 border-border/10 border-t-border/10 from-primary/5 to-primary/2 bg-white/10 backdrop-blur-md border-b-0 shadow-2xl'>
                 <div className='flex items-center justify-between'>
                     {/* Logo */}
-                    <Link href="/" className='flex items-center gap-4 dark:invert'>
+                    <Link href="/" className='flex items-center gap-4 invert'>
                         <Image
                             src="/BRXLogo.png"
                             alt="BRX Labz"
@@ -30,6 +30,7 @@ function Navbar() {
                             quality={100}
                             priority
                             className="w-auto h-7 md:h-10"
+                            style={{ width: 'auto' }}
                         />
                     </Link>
 
@@ -49,7 +50,7 @@ function Navbar() {
                     {/* Actions */}
                     <div className="flex items-center gap-2">
                         <Link href="https://cal.com/brx-labz/30min" className='hidden sm:flex items-center'>
-                            <InteractiveHoverButton className="dark:invert dark:border-none dark:text-primary h-9 px-5 text-xs">
+                            <InteractiveHoverButton className="invert border-none text-primary h-9 px-5 text-xs">
                                 Book a Call
                             </InteractiveHoverButton>
                         </Link>

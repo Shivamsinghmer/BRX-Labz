@@ -19,7 +19,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("border-border dark:border-border/15 border-b", className)}
+      className={cn("border-border border-border/15 border-b", className)}
       {...props} />
   );
 }
@@ -61,4 +61,4 @@ function AccordionContent({
   );
 }
 
-export { Accordion, AccordionContent,AccordionItem, AccordionTrigger };
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger };

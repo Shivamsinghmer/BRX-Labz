@@ -223,7 +223,7 @@ const Pricing = () => {
 
                 {/* Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center max-w-6xl mx-auto">
-                    <AnimatePresence mode="wait">
+                    <AnimatePresence>
                         {content[plan].map((card, idx) => (
                             <PricingCard
                                 key={`${plan}-${card.title}`}

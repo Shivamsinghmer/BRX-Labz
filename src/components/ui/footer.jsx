@@ -49,7 +49,7 @@ function FooterBottom({
     <div
       data-slot="footer-bottom"
       className={cn(
-        "border-border dark:border-border/15 text-muted-foreground mt-8 flex flex-col items-center justify-between gap-4 border-t pt-4 text-xs sm:flex-row",
+        "border-border border-border/15 text-muted-foreground mt-8 flex flex-col items-center justify-between gap-4 border-t pt-4 text-xs sm:flex-row",
         className
       )}
       {...props} />

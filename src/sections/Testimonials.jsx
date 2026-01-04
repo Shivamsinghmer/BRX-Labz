@@ -57,7 +57,7 @@ export function Testimonials() {
         <h2 className="text-2xl md:text-4xl font-black mb-4 tracking-tighter">
           <span className="text-white drop-shadow-2xl">Don&apos;t Take Our Word.</span>
           <br />
-          <span className="bg-linear-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent italic">
+          <span className="bg-linear-to-r from-gray-100 via-gray-300 to-gray-500 bg-clip-text text-transparent italic">
             Take Their&apos;s.
           </span>
         </h2>
