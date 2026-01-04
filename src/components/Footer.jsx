@@ -33,9 +33,9 @@ export default function FooterSection({
         {
             title: "Socials",
             links: [
-                { text: "LinkedIn", href: "https://linkedin.com" },
-                { text: "Twitter / X", href: "https://x.com" },
-                { text: "Instagram", href: "https://instagram.com" },
+                { text: "LinkedIn", href: "https://www.linkedin.com/company/brx-labz" },
+                { text: "Twitter / X", href: "https://x.com/BrxLabz" },
+                { text: "Instagram", href: "https://www.instagram.com/brxlabz/" },
             ],
         },
     ],
