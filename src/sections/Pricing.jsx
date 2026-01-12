@@ -1,96 +1,105 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from "motion/react"
-import { Check, ChevronRight, Calendar, Mail, X } from "lucide-react"
+import { Check, ChevronRight, Calendar, Mail, X, MessageCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { content } from "@/data/pricing.js"
 
-const ContactModal = ({ isOpen, onClose }) => {
-    if (!isOpen) return null;
+const ContactModal = ({ onClose }) => {
+    const [mounted, setMounted] = useState(false)
 
-    return (
-        <AnimatePresence>
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+    useEffect(() => {
+        setMounted(true)
+        return () => setMounted(false)
+    }, [])
+
+    if (!mounted) return null
+
+    return createPortal(
+        <div className="fixed inset-0 z-9999 flex items-center justify-center p-4">
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+                className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+            <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative z-10 w-full max-w-md bg-neutral-900 border border-white/10 rounded-[2.5rem] p-8 md:p-10 overflow-hidden shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Background Glow */}
+                <div className="absolute -top-24 -left-24 w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
+
+                <button
                     onClick={onClose}
-                    className="absolute inset-0 bg-black/80 backdrop-blur-md"
-                />
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                    className="relative w-full max-w-md bg-neutral-900 border border-white/10 rounded-[2.5rem] p-8 md:p-10 overflow-hidden"
-                    onClick={(e) => e.stopPropagation()}
+                    className="absolute top-4 right-4 md:top-6 md:right-6 z-50 p-3 md:p-2 rounded-full bg-white/10 border border-white/10 text-white/60 hover:text-white hover:bg-white/20 transition-all active:scale-95"
+                    aria-label="Close modal"
                 >
-                    {/* Background Glow */}
-                    <div className="absolute -top-24 -left-24 w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
+                    <X size={18} className="md:w-4 md:h-4" />
+                </button>
 
-                    <button
-                        onClick={onClose}
-                        className="absolute top-4 right-4 md:top-6 md:right-6 z-50 p-3 md:p-2 rounded-full bg-white/10 border border-white/10 text-white/60 hover:text-white hover:bg-white/20 transition-all active:scale-95"
-                        aria-label="Close modal"
-                    >
-                        <X size={18} className="md:w-4 md:h-4" />
-                    </button>
-
-                    <div className="relative z-10 space-y-8">
-                        <div className="text-center space-y-2">
-                            <h3 className="text-2xl font-black text-white tracking-tight uppercase">Let&apos;s talk.</h3>
-                            <p className="text-white/40 text-sm font-medium">How would you like to proceed?</p>
-                        </div>
-
-                        <div className="grid gap-4">
-                            <a
-                                href="https://cal.com/brx-labz/30min"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group flex items-center gap-4 p-5 rounded-2xl bg-white text-black font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center">
-                                    <Calendar className="w-6 h-6" />
-                                </div>
-                                <div className="text-left">
-                                    <p className="text-sm uppercase tracking-widest leading-none mb-1">Book a Meeting</p>
-                                    <p className="text-black/80 text-[11px] font-medium">30 min strategy session via Cal.com</p>
-                                </div>
-                            </a>
-
-                            <a
-                                href="mailto:brxlabz@gmail.com"
-                                className="group flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold transition-all hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] active:scale-[0.98]"
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                                    <Mail className="w-6 h-6" />
-                                </div>
-                                <div className="text-left">
-                                    <p className="text-sm uppercase tracking-widest leading-none mb-1">Send an Email</p>
-                                    <p className="text-white/40 text-[11px] font-medium">Drop us a line at brxlabz@gmail.com</p>
-                                </div>
-                            </a>
-                            <a
-                                href="https://wa.me/919451201779"
-                                className="group flex items-center gap-4 p-5 rounded-2xl bg-green-800/10 border border-white/10 text-white font-bold transition-all hover:bg-green-500/20 hover:border-white/20 hover:scale-[1.02] active:scale-[0.98]"
-                            >
-                                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
-                                    <Mail className="w-6 h-6" />
-                                </div>
-                                <div className="text-left">
-                                    <p className="text-sm uppercase tracking-widest leading-none mb-1">WhatsApp Message</p>
-                                    <p className="text-green-500/60 text-[11px] font-medium">Send us a message at +91 9451201779</p>
-                                </div>
-                            </a>
-                        </div>
-
-                        <p className="text-center text-[10px] text-white/20 font-bold uppercase tracking-widest">
-                            Available for new projects
-                        </p>
+                <div className="relative z-10 space-y-8">
+                    <div className="text-center space-y-2">
+                        <h3 className="text-2xl font-black text-white tracking-tight uppercase">Let&apos;s talk.</h3>
+                        <p className="text-white/40 text-sm font-medium">How would you like to proceed?</p>
                     </div>
-                </motion.div>
-            </div>
-        </AnimatePresence>
+
+                    <div className="grid gap-4">
+                        <a
+                            href="https://cal.com/brx-labz/30min"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-4 p-5 rounded-2xl bg-white text-black font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                            <div className="w-12 h-12 rounded-xl bg-black/5 flex items-center justify-center">
+                                <Calendar className="w-6 h-6" />
+                            </div>
+                            <div className="text-left">
+                                <p className="text-sm uppercase tracking-widest leading-none mb-1">Book a Meeting</p>
+                                <p className="text-black/80 text-[11px] font-medium">30 min strategy session via Cal.com</p>
+                            </div>
+                        </a>
+
+                        <a
+                            href="mailto:brxlabz@gmail.com"
+                            className="group flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/10 text-white font-bold transition-all hover:bg-white/10 hover:border-white/20 hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
+                                <Mail className="w-6 h-6" />
+                            </div>
+                            <div className="text-left">
+                                <p className="text-sm uppercase tracking-widest leading-none mb-1">Send an Email</p>
+                                <p className="text-white/40 text-[11px] font-medium">Drop us a line at brxlabz@gmail.com</p>
+                            </div>
+                        </a>
+                        <a
+                            href="https://wa.me/919451201779"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center gap-4 p-5 rounded-2xl bg-green-800/10 border border-white/10 text-white font-bold transition-all hover:bg-green-500/20 hover:border-white/20 hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                            <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center">
+                                <MessageCircle className="w-6 h-6" />
+                            </div>
+                            <div className="text-left">
+                                <p className="text-sm uppercase tracking-widest leading-none mb-1">WhatsApp Message</p>
+                                <p className="text-green-500/60 text-[11px] font-medium">Send us a message at +91 9451201779</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <p className="text-center text-[10px] text-white/20 font-bold uppercase tracking-widest">
+                        Available for new projects
+                    </p>
+                </div>
+            </motion.div>
+        </div>,
+        document.body
     )
 }
 
@@ -252,10 +261,13 @@ const Pricing = () => {
                 </motion.div>
             </div>
 
-            <ContactModal
-                isOpen={isContactOpen}
-                onClose={() => setIsContactOpen(false)}
-            />
+            <AnimatePresence>
+                {isContactOpen && (
+                    <ContactModal
+                        onClose={() => setIsContactOpen(false)}
+                    />
+                )}
+            </AnimatePresence>
         </section>
     )
 }
