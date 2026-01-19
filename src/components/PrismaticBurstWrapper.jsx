@@ -1,42 +1,40 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import dynamic from "next/dynamic";
+import React from 'react';
 
-const PrismaticBurst = dynamic(() => import("./PrismaticBurst"), {
-    ssr: false,
-});
+export default function PrismaticBurstWrapper() {
+    const videoRef = React.useRef(null);
+    const [isLoaded, setIsLoaded] = React.useState(false);
 
-export default function PrismaticBurstWrapper(props) {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkIsMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-
-        checkIsMobile();
-        window.addEventListener('resize', checkIsMobile);
-
-        return () => window.removeEventListener('resize', checkIsMobile);
+    React.useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.playbackRate = 0.75;
+            // Check if video is already ready (e.g. from cache)
+            if (videoRef.current.readyState >= 3) {
+                setIsLoaded(true);
+            }
+        }
     }, []);
 
-    if (isMobile) {
-        return (
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-lighten"
-                >
-                    <source src="/bg.mp4" type="video/mp4" />
-                </video>
-            </div>
-        );
-    }
+    return (
+        <div className="absolute inset-0 w-full h-full overflow-hidden bg-black">
+            {/* Fallback gradient/color while video loads */}
+            <div className={`absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-black transition-opacity duration-1000 ${isLoaded ? 'opacity-80' : 'opacity-100'}`} />
 
-    return <PrismaticBurst {...props} />;
+            <video
+                ref={videoRef}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                onLoadedData={() => setIsLoaded(true)}
+                onCanPlay={() => setIsLoaded(true)}
+                className={`absolute inset-0 w-full h-full object-cover blur-sm transition-opacity duration-1000 ${isLoaded ? 'opacity-60' : 'opacity-0'
+                    }`}
+            >
+                <source src="/bg.mp4" type="video/mp4" />
+            </video>
+        </div>
+    );
 }
