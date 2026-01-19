@@ -30,7 +30,7 @@ export default function PrismaticBurstWrapper() {
                 preload="auto"
                 onLoadedData={() => setIsLoaded(true)}
                 onCanPlay={() => setIsLoaded(true)}
-                className={`absolute inset-0 w-full h-full object-cover blur-sm transition-opacity duration-1000 ${isLoaded ? 'opacity-60' : 'opacity-0'
+                className={`absolute inset-0 w-full h-full object-cover blur-xs transition-opacity duration-1000 ${isLoaded ? 'opacity-60' : 'opacity-0'
                     }`}
             >
                 <source src="/bg.mp4" type="video/mp4" />
