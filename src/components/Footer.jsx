@@ -41,8 +41,11 @@ export default function FooterSection({
     ],
     copyright = `© ${new Date().getFullYear()} BRX Labz. All rights reserved.`,
     policies = [
+        { text: "Terms of Service", href: "/policies#terms" },  
         { text: "Privacy Policy", href: "/policies#privacy" },
-        { text: "Terms of Service", href: "/policies#terms" },
+        { text: "Refund Policy", href: "/policies#refund" },
+        { text: "Return Policy", href: "/policies#return" },
+        { text: "Shipping Policy", href: "/policies#shipping" },
     ],
     showModeToggle = true,
     className,
